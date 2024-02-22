@@ -7,4 +7,14 @@ terraform {
   }
 
   required_version = "~> 1.2"
+
+  cloud {
+    organization = "ericreeves-demo"
+    hostname     = "app.terraform.io"
+
+    workspaces {
+      project = "Cube Earth Labs"
+      name    = "terraform-aws-s3-website-tests"
+    }
+  }
 }
