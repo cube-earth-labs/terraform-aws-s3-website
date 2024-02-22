@@ -28,4 +28,24 @@ run "create_bucket" {
     condition     = aws_s3_object.error.etag == filemd5("./www/error.html")
     error_message = "Invalid eTag for error.html"
   }
+
+  assert {
+    condition     = aws_s3_bucket_acl.s3_bucket.acl == "public-read"
+    error_message = "ACL is incorrect"
+  }
+
+   assert {
+    condition     = aws_s3_object.index.key == "index.html"
+    error_message = "Index object key is incorrect"
+  }
+
+  assert {
+    condition     = aws_s3_object.index.content_type == "text/html"
+    error_message = "Index object content type is incorrect"
+  }
+
+  assert {
+    condition     = output.website_endpoint == "http://${aws_s3_bucket_website_configuration.s3_bucket.website_endpoint}/index.html"
+    error_message = "Website endpoint is incorrect"
+  }
 }
