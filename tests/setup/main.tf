@@ -12,5 +12,6 @@ resource "random_pet" "bucket_prefix" {
 }
 
 output "bucket_prefix" {
-  value = random_pet.bucket_prefix.id
+  # value = random_pet.bucket_prefix.id
+  value = "eric-test"
 }
